@@ -22,38 +22,8 @@ import {InputText} from '../../components';
 // create a component
 const GladToUser = () => {
   const {goBack, navigate} = useNavigation();
-  // const [educationInstitution, setEducationInstitution] = useState('');
-  // const [specialization, setSpecialization] = useState('');
-
-  // const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
-  // const [currentStartPress, setCurrentStartPress] = useState(false);
-
-  // const [startDate, setStartDate] = useState('');
-  // const [endDate, setEndDate] = useState('');
-
-  // const [progressDataAllow, setProgressDataAllow] = useState(false);
 
   const onPressBack = () => goBack();
-
-  // const onPressDatePicker = () => setIsOpenDatePicker(true);
-  // const onCloseDatePicker = (type, date) => {
-  //   console.log('date', date);
-  //   if (currentStartPress) {
-  //     setStartDate(moment(date).format('MM.YYYY'));
-  //   } else {
-  //     setEndDate(moment(date).format('MM.YYYY'));
-  //   }
-  //   setCurrentStartPress(false);
-  //   setIsOpenDatePicker(false);
-  // };
-
-  // const onPressStartPicker = () => {
-  //   setIsOpenDatePicker(true);
-  //   setCurrentStartPress(true);
-  // };
-
-  // const onChangeInstitute = text => setEducationInstitution(text);
-  // const onChangeSpecialization = text => setSpecialization(text);
 
   return (
     <View style={styles.container}>
