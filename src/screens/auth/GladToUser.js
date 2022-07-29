@@ -11,7 +11,7 @@ import {
 import {isEmpty} from 'lodash';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
-// import MonthPicker from 'react-native-month-year-picker';
+
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {icons} from '../../helpers/iconConstants';

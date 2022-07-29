@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
-// import MonthPicker from 'react-native-month-year-picker';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {icons} from '../../helpers/iconConstants';
@@ -29,9 +29,12 @@ const CourceInfo = () => {
   const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
 
   const onPressDatePicker = () => setIsOpenDatePicker(true);
-  const onCloseDatePicker = (type, date) => {
-    setYourBirthday(moment(date).format('MM.YYYY'));
+  const onCloseDatePicker = () => setIsOpenDatePicker(false);
+
+  const onConfirmDate = date => {
+    console.log('date', date);
     setIsOpenDatePicker(false);
+    setYourBirthday(moment(date).format('MM.YYYY'));
   };
 
   const onChangeInstitute = text => setEducationInstitution(text);
@@ -109,14 +112,12 @@ const CourceInfo = () => {
         </KeyboardAwareScrollView>
       </View>
 
-      {/* {isOpenDatePicker && (
-        <MonthPicker
-          onChange={onCloseDatePicker}
-          value={new Date()}
-          maximumDate={new Date()}
-          locale="en"
-        />
-      )} */}
+      <DateTimePicker
+        isVisible={isOpenDatePicker}
+        onConfirm={onConfirmDate}
+        onCancel={onCloseDatePicker}
+        mode={'date'}
+      />
 
       <Image
         source={icons.spryText}

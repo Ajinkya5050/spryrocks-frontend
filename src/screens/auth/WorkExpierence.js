@@ -11,7 +11,8 @@ import {
 import {isEmpty} from 'lodash';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
-// import MonthPicker from 'react-native-month-year-picker';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {icons} from '../../helpers/iconConstants';
@@ -26,28 +27,21 @@ const WorkExpierence = () => {
   const [specialization, setSpecialization] = useState('');
 
   const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
-  const [currentStartPress, setCurrentStartPress] = useState(false);
+  const [endDatePicker, setEndDatePicker] = useState(false);
 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
   const onPressBack = () => goBack();
 
-  const onPressDatePicker = () => setIsOpenDatePicker(true);
-  const onCloseDatePicker = (type, date) => {
-    console.log('date', date);
-    if (currentStartPress) {
-      setStartDate(moment(date).format('MM.YYYY'));
-    } else {
-      setEndDate(moment(date).format('MM.YYYY'));
-    }
-    setCurrentStartPress(false);
+  const onConfirmStartDate = date => {
+    setStartDate(moment(date).format('MM.YYYY'));
     setIsOpenDatePicker(false);
   };
 
-  const onPressStartPicker = () => {
-    setIsOpenDatePicker(true);
-    setCurrentStartPress(true);
+  const onConfirmEndDate = date => {
+    setEndDate(moment(date).format('MM.YYYY'));
+    setEndDatePicker(false);
   };
 
   const onChangeInstitute = text => setEducationInstitution(text);
@@ -105,28 +99,36 @@ const WorkExpierence = () => {
           <View style={{flexDirection: 'row'}}>
             <View style={{flex: 1, marginRight: wp(1)}}>
               <Text style={styles.inputTitleText}>{'Start'}</Text>
-              <TouchableOpacity activeOpacity={1} onPress={onPressStartPicker}>
-                <TextInput
-                  editable={false}
-                  value={startDate}
-                  onPressIn={onPressStartPicker}
-                  style={styles.inputContainer}
-                  placeholder={'mm.yyyy'}
-                  placeholderTextColor={colors.placeHolder}
-                />
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => setIsOpenDatePicker(true)}>
+                <View pointerEvents="none">
+                  <TextInput
+                    editable={false}
+                    value={startDate}
+                    onPressIn={() => setIsOpenDatePicker(true)}
+                    style={styles.inputContainer}
+                    placeholder={'mm.yyyy'}
+                    placeholderTextColor={colors.placeHolder}
+                  />
+                </View>
               </TouchableOpacity>
             </View>
             <View style={{flex: 1, marginLeft: wp(1)}}>
               <Text style={styles.inputTitleText}>{'End'}</Text>
-              <TouchableOpacity activeOpacity={1} onPress={onPressDatePicker}>
-                <TextInput
-                  editable={false}
-                  value={endDate}
-                  onPressIn={onPressDatePicker}
-                  style={styles.inputContainer}
-                  placeholder={'mm.yyyy'}
-                  placeholderTextColor={colors.placeHolder}
-                />
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => setEndDatePicker(true)}>
+                <View pointerEvents="none">
+                  <TextInput
+                    editable={false}
+                    value={endDate}
+                    onPressIn={() => setEndDatePicker(true)}
+                    style={styles.inputContainer}
+                    placeholder={'mm.yyyy'}
+                    placeholderTextColor={colors.placeHolder}
+                  />
+                </View>
               </TouchableOpacity>
             </View>
           </View>
@@ -137,14 +139,18 @@ const WorkExpierence = () => {
           </TouchableOpacity>
         </KeyboardAwareScrollView>
       </View>
-      {/* {isOpenDatePicker && (
-        <MonthPicker
-          onChange={onCloseDatePicker}
-          value={new Date()}
-          maximumDate={new Date()}
-          locale="en"
-        />
-      )} */}
+      <DateTimePicker
+        isVisible={isOpenDatePicker}
+        onConfirm={onConfirmStartDate}
+        onCancel={() => setIsOpenDatePicker(false)}
+        mode={'date'}
+      />
+      <DateTimePicker
+        isVisible={endDatePicker}
+        onConfirm={onConfirmEndDate}
+        onCancel={() => setEndDatePicker(false)}
+        mode={'date'}
+      />
 
       <Image
         source={icons.spryText}

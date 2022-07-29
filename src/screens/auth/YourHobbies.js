@@ -12,7 +12,6 @@ import {
 import {isEmpty} from 'lodash';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
-// import MonthPicker from 'react-native-month-year-picker';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {icons} from '../../helpers/iconConstants';
@@ -27,32 +26,9 @@ const YourHobbies = () => {
   const [userQuestion, setUserQuestion] = useState('');
   const [specialization, setSpecialization] = useState('');
 
-  // const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
-  // const [currentStartPress, setCurrentStartPress] = useState(false);
-
-  // const [startDate, setStartDate] = useState('');
-  // const [endDate, setEndDate] = useState('');
-
   const [progressDataAllow, setProgressDataAllow] = useState(false);
 
   const onPressBack = () => goBack();
-
-  // const onPressDatePicker = () => setIsOpenDatePicker(true);
-  // const onCloseDatePicker = (type, date) => {
-  //   console.log('date', date);
-  //   if (currentStartPress) {
-  //     setStartDate(moment(date).format('MM.YYYY'));
-  //   } else {
-  //     setEndDate(moment(date).format('MM.YYYY'));
-  //   }
-  //   setCurrentStartPress(false);
-  //   setIsOpenDatePicker(false);
-  // };
-
-  // const onPressStartPicker = () => {
-  //   setIsOpenDatePicker(true);
-  //   setCurrentStartPress(true);
-  // };
 
   const onChangeFreeTime = text => setFreeTime(text);
   const onChangeUserQuestion = text => setUserQuestion(text);
